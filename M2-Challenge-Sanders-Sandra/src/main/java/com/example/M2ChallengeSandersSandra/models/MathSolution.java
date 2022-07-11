@@ -8,6 +8,7 @@ public class MathSolution {
     public int answer;
     public String operation;
 
+
     public MathSolution(int operand1, int operand2, String operation) {
         this.operand1 = operand1;
         this.operand2 = operand2;
@@ -20,6 +21,11 @@ public class MathSolution {
         this.operand2 = operand2;
         this.answer = answer;
         this.operation = operation;
+    }
+
+    public MathSolution(int operand1, int operand2) {
+        this.operand1 = operand1;
+        this.operand2 = operand2;
     }
 
     public MathSolution() {
