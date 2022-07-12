@@ -11,11 +11,13 @@ import java.util.List;
 
 @RestController
 public class MonthController {
-
+ int number;
     @RequestMapping(value = "/month/{monthNumber}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public Month getMonth(@PathVariable String monthNumber) {
-
+      if(number < 1 ||  number > 12){
+          throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "monthNumber must be between 1 and 12");
+         }
         switch (monthNumber) {
             case "1":
                 return new Month(1, "January");
