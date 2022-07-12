@@ -42,7 +42,7 @@ public class MonthController {
             case "12":
                 return new Month(12, "December");
             default:
-                throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Invalid Month Number Specified");
+                throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY , "Month number must be between 1 and 12");
         }
 
     }

@@ -53,4 +53,11 @@ public class Month {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+
+    public void setMonthNumber(int i) {
+    }
+
+    public void setMonthName(String january) {
+    }
 }
