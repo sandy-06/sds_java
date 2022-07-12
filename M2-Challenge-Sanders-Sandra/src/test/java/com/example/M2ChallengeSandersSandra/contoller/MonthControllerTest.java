@@ -16,6 +16,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultMatcher;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
@@ -33,28 +35,28 @@ public class MonthControllerTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    @Before
+    
 
 
     @Test
     public void shouldReturnAMonthByMonthNumber() throws Exception {
         //Arrange
         Month outputMonth = new Month();
-        outputMonth.setMonthNumber(1);
-        @Valid
-        @Min(1) @Max(12) int monthNumber = 1;
+        outputMonth.setNumber(1);
+        outputMonth.setName("January");
 
-        mockMvc.perform(get("/month/1"))
+        String outputJson = mapper.writeValueAsString(outputMonth);
+        mockMvc.perform(get("/month/{monthNumber}", 1))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().json(mapper.writeValueAsString(outputMonth)));
+                    .andExpect(content().json(outputJson));
     }
 
     @Test
     public void shouldReturnAMonthByMonthName() throws Exception {
         //Arrange
         Month outputMonth = new Month();
-        outputMonth.setMonthName("January");
+        outputMonth.setName("January");
 
     }
 
@@ -62,10 +64,13 @@ public class MonthControllerTest {
     @Test
     public void shouldGetRandomMonth() throws Exception {
         //Arrange
-        mockMvc.perform(get("/month/random"))
+        mockMvc.perform(get("/randomMonth"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"monthNumber\":1,\"monthName\":\"January\"}"));
+                .andExpect(jsonPath("$.number").isNotEmpty())       // Assert
+                .andExpect(jsonPath("$.name").isNotEmpty())       // Assert
+                .andExpect(jsonPath("$.number").isNumber())       // Assert
+                .andExpect(jsonPath("$.name").isString());       // Assert
     }
 
 }

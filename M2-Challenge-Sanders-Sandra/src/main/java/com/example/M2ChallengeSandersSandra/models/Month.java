@@ -6,8 +6,8 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
 public class Month {
-    public int number;
-    public String name;
+    private int number;
+    private String name;
 
     public Month(int number, String name) {
         this.number = number;
@@ -53,11 +53,7 @@ public class Month {
                 ", name='" + name + '\'' +
                 '}';
     }
-
-
-    public void setMonthNumber(int i) {
-    }
-
-    public void setMonthName(String january) {
-    }
 }
+
+
+

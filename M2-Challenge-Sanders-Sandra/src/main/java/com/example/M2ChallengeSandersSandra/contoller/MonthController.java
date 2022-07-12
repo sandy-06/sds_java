@@ -14,72 +14,101 @@ public class MonthController {
  int number;
     @RequestMapping(value = "/month/{monthNumber}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public Month getMonth(@PathVariable String monthNumber) {
-      if(number < 1 ||  number > 12){
-          throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "monthNumber must be between 1 and 12");
-         }
-        switch (monthNumber) {
-            case "1":
-                return new Month(1, "January");
-            case "2":
-                return new Month(2, "February");
-            case "3":
-                return new Month(3, "March");
-            case "4":
-                return new Month(4, "April");
-            case "5":
-                return new Month(5, "May");
-            case "6":
-                return new Month(6, "June");
-            case "7":
-                return  new Month(7, "July");
-            case "8":
-                return new Month(8, "August");
-            case "9":
-                return new Month(9, "September");
-            case "10":
-                return new Month(10, "October");
-            case "11":
-                return new Month(11, "November");
-            case "12":
-                return new Month(12, "December");
-            default:
-                throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY , "Month number must be between 1 and 12");
+    public Month getMonth(@PathVariable int monthNumber) {
+      if(monthNumber < 1 || monthNumber > 12){
+          throw new IndexOutOfBoundsException("monthNumber must be between 1 and 12");
         }
-
+      Month month = new Month();
+        month.setNumber(monthNumber);
+        switch (monthNumber) {
+            case 1:
+                month.setName("January");
+                break;
+            case 2:
+                month.setName("February");
+                break;
+            case 3:
+                month.setName("March");
+                break;
+            case 4:
+                month.setName("April");
+                break;
+            case 5:
+                month.setName("May");
+                break;
+            case 6:
+                month.setName("June");
+                break;
+            case 7:
+                month.setName("July");
+                break;
+            case 8:
+                month.setName("August");
+                break;
+            case 9:
+                month.setName("September");
+                break;
+            case 10:
+                month.setName("October");
+                break;
+            case 11:
+                month.setName("November");
+                break;
+            case 12:
+                month.setName("December");
+                break;
+            default:
+               throw new IndexOutOfBoundsException("monthNumber must be between 1 and 12");
+        }
+return month;
     }
     @RequestMapping(value = "/randomMonth", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public Month getRandomMonth() {
         int randomMonth = (int) (Math.random() * 12) + 1;
+        Month month = new Month();
+        month.setNumber(randomMonth);
         switch (randomMonth) {
             case 1:
-                return new Month(1, "January");
+                month.setName("January");
+                break;
             case 2:
-                return new Month(2, "February");
+                month.setName("February");
+                break;
             case 3:
-                return new Month(3, "March");
+                month.setName("March");
+                break;
             case 4:
-                return new Month(4, "April");
+                month.setName("April");
+                break;
             case 5:
-                return new Month(5, "May");
+                month.setName("May");
+                break;
             case 6:
-                return new Month(6, "June");
+                month.setName("June");
+                break;
             case 7:
-                return  new Month(7, "July");
+                month.setName("July");
+                break;
             case 8:
-                return new Month(8, "August");
+                month.setName("August");
+                break;
             case 9:
-                return new Month(9, "September");
+                month.setName("September");
+                break;
             case 10:
-                return new Month(10, "October");
+                month.setName("October");
+                break;
             case 11:
-                return new Month(11, "November");
+                month.setName("November");
+                break;
             case 12:
-                return new Month(12, "December");
+                month.setName("December");
+                break;
             default:
-                throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Invalid Month Number Specified");
+                throw new IndexOutOfBoundsException("monthNumber must be between 1 and 12");
         }
+        return month;
     }
 
 
